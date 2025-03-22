@@ -9,10 +9,10 @@ import backgroundAnimation from "../../assets/background.json";
 import authoricon from '../../assets/authoricon.json'
 import usericon from '../../assets/usericon.json'
 import adminicon from '../../assets/adminicon.json'
-import { Link } from 'react-router-dom'
+
 import { IoBookOutline } from "react-icons/io5";
 import { LuClipboardPenLine } from "react-icons/lu";
-import { BiWorld } from "react-icons/bi";
+
 import loadingic from '../../assets/loadingic.json'
 
 function Home() {
@@ -33,7 +33,7 @@ function Home() {
   // console.log("User:",user)
   // console.log("isLoaded:",isLoaded)
 
-
+console.log("h",BACKEND_URL)
   async function onSelectRole(selectedRole) {
     //clear error property
     setError('')
@@ -44,7 +44,7 @@ function Home() {
     // setIsLoading(true)
     try {
       if (selectedRole === 'author') {
-        console.log(currentUser.isBlocked)
+        // console.log(currentUser.isBlocked)
         if(!currentUser.isBlocked){
         res = await axios.post(`${BACKEND_URL}/author-api/author`, currentUser)
         let { message, payload } = res.data;

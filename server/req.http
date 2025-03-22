@@ -1,7 +1,7 @@
 
 
 ### create author
-POST http://localhost:3000/author-api/author
+POST https://blog-application-t4rh.onrender.com/author-api/author
 Content-Type: application/json
 
 {
