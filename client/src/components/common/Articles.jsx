@@ -14,6 +14,7 @@ function Articles() {
   const [isLoading,setIsLoading]=useState(false)
   const navigate = useNavigate();
   const { getToken } = useAuth();
+  const BACKEND_URL=import.meta.env.VITE_BACKEND_URL
 
   // Fetch all articles
   async function getArticles() {
@@ -21,7 +22,7 @@ function Articles() {
     try {
       const token = await getToken();
       const cat=category
-      const res = await axios.get(`http://localhost:3000/author-api/articles/${cat}`, {
+      const res = await axios.get(`${BACKEND_URL}/author-api/articles/${cat}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

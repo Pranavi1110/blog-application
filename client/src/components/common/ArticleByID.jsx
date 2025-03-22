@@ -19,6 +19,7 @@ function ArticleByID() {
   const {getToken}=useAuth()
   const [currentArticle,setCurrentArticle]=useState(state)
   const [commentStatus,setCommentStatus]=useState('')
+  const BACKEND_URL=import.meta.env.VITE_BACKEND_URL
   // const [commentdelete,setCommentDelete]=useState('')
   // const [errors,setErrors]=useState('')
 
@@ -43,7 +44,7 @@ function ArticleByID() {
     // console.log(modifiedArticle)
 
     //make http post req
-    let res=await axios.put(`http://localhost:3000/author-api/article/${ArticleAfterChanges.articleId}`,ArticleAfterChanges,{
+    let res=await axios.put(`${BACKEND_URL}/author-api/article/${ArticleAfterChanges.articleId}`,ArticleAfterChanges,{
       headers:{
         Authorization:`Bearer ${token}`
       }
@@ -66,7 +67,7 @@ function ArticleByID() {
     commentObj.profileImageUrl=currentUser.profileImageUrl?currentUser.profileImageUrl:"https://static.vecteezy.com/system/resources/previews/009/734/564/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
     console.log(commentObj)
     //http put req(to add  comment to comments array in backend)
-    let res=await axios.put(`http://localhost:3000/user-api/comment/${currentArticle.articleId}`,commentObj)
+    let res=await axios.put(`${BACKEND_URL}/user-api/comment/${currentArticle.articleId}`,commentObj)
     if(res.data.message==='Comment Added'){
       setCommentStatus(res.data.message)
       setCurrentArticle(res.data.payload)
@@ -80,7 +81,7 @@ function ArticleByID() {
    //delete article
    async function deleteArticle(){
     state.isArticleActive=false;
-    let res=await axios.put(`http://localhost:3000/author-api/articles/${state.articleId}`,state)
+    let res=await axios.put(`${BACKEND_URL}/author-api/articles/${state.articleId}`,state)
     if(res.data.message==='Article Deleted or Restored'){
       setCurrentArticle(res.data.payload)
   }
@@ -93,7 +94,7 @@ function ArticleByID() {
         console.error('Authentication token missing');
         return;
       }
-    const res=await axios.delete(`http://localhost:3000/user-api/comment/${currentArticle.articleId}/${commentId}`,{
+    const res=await axios.delete(`${BACKEND_URL}/user-api/comment/${currentArticle.articleId}/${commentId}`,{
       headers:{
         Authorization:`Bearer ${token}`
       },
@@ -114,7 +115,7 @@ function ArticleByID() {
   //restore article
   async function restoreArticle(){
     const updatedState = { ...state, isArticleActive: true };
-    let res = await axios.put(`http://localhost:3000/author-api/articles/${state.articleId}`, updatedState);
+    let res = await axios.put(`${BACKEND_URL}/author-api/articles/${state.articleId}`, updatedState);
     if(res.data.message === "Article Deleted or Restored"){
       setCurrentArticle(res.data.payload);
     }

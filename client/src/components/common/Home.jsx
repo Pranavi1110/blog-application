@@ -21,6 +21,7 @@ function Home() {
   const [error,setError]=useState("")
   const navigate=useNavigate()
   const [isLoading,setIsLoading]=useState(false)
+  const BACKEND_URL=import.meta.env.VITE_BACKEND_URL
   const adminEmail="tandravaishnavi610@gmail.com"
   // isLoading(true)
   // setTimeout(()=>{
@@ -45,7 +46,7 @@ function Home() {
       if (selectedRole === 'author') {
         console.log(currentUser.isBlocked)
         if(!currentUser.isBlocked){
-        res = await axios.post('http://localhost:3000/author-api/author', currentUser)
+        res = await axios.post(`${BACKEND_URL}/author-api/author`, currentUser)
         let { message, payload } = res.data;
         // console.log(message, payload)
         if (message === 'author') {
@@ -64,7 +65,7 @@ function Home() {
       if (selectedRole === 'user') {
         if(!currentUser.isBlocked){
         console.log(currentUser)
-        res = await axios.post('http://localhost:3000/user-api/user', currentUser)
+        res = await axios.post(`${BACKEND_URL}/user-api/user`, currentUser)
         let { message, payload } = res.data;
         console.log(message)
         if (message === 'user') {
@@ -81,7 +82,7 @@ function Home() {
       }
       if(selectedRole==='admin' ){
         if( currentUser.email===adminEmail){
-        res=await axios.post('http://localhost:3000/admin-api/admin', currentUser)
+        res=await axios.post(`${BACKEND_URL}/admin-api/admin`, currentUser)
         let {message,payload}=res.data;
         if(message==='admin'){
           setCurrentUser({...currentUser,...payload})

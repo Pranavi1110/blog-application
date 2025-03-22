@@ -12,13 +12,14 @@ function Both() {
     // const [blockStatus,setBlockStatus]=useState(null)
     const [isLoading,setIsLoading]=useState(false)
     const { getToken } = useAuth();
+    const BACKEND_URL=import.meta.env.VITE_BACKEND_URL
 
     // Fetch users
     async function getBoth() {
         setIsLoading(true)
         try {
             const token = await getToken();
-            const res = await axios.get("http://localhost:3000/admin-api/both", {
+            const res = await axios.get(`${BACKEND_URL}/admin-api/both`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
@@ -50,7 +51,7 @@ async function toggleBlock(email, isBlocked) {
         try {
             const token = await getToken();
             const res = await axios.put(
-                "http://localhost:3000/admin-api/both",
+                `${BACKEND_URL}/admin-api/both`,
                 { email },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
