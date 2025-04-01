@@ -2,6 +2,7 @@
 const UserAuthor=require('../modals/userAuthorModel')
 
 async function createUserOrAuthor(req,res){
+    try{
     //business logic to create user or author
         //get user or author obj from req
         const newUserAuthor=req.body
@@ -23,5 +24,12 @@ async function createUserOrAuthor(req,res){
             let newUserOrAuthorDoc=await newUser.save()
             res.status(201).send({message:newUserOrAuthorDoc.role,payload:newUserOrAuthorDoc})
         }
+    }catch(error){
+        if (error.code === 11000) {
+            res.status(400).send({ message: "User with this email already exists. Please log in instead." });
+        } else {
+            res.status(500).send({ message: "Internal server error", error });
+        }
+    }
 }
 module.exports=createUserOrAuthor

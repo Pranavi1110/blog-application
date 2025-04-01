@@ -494,14 +494,12 @@ body {
   .lottie-animation {
     max-width: 450px;
   }
-
   .siname {
     font-size: 1.7rem;
   }
   .auth{
     width: 50%;
-    gap:2px
-    
+    gap:2px; 
   }
   .ar,.art{
     font-size: 1rem;
@@ -616,7 +614,7 @@ body {
     font-size: 0.8rem;
     margin-left: 35px;
   }
-  .rounded-circle,.name-hi{
+  .rounded-circle{
     display: none;
   }
   .title{

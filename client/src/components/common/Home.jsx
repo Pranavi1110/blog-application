@@ -33,7 +33,7 @@ function Home() {
   // console.log("User:",user)
   // console.log("isLoaded:",isLoaded)
 
-console.log("h",BACKEND_URL)
+// console.log("h",BACKEND_URL)
   async function onSelectRole(selectedRole) {
     //clear error property
     setError('')
